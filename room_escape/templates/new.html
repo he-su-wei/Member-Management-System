@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}<title>資料新增</title>{% endblock %}
+
+{% block css %}
+<link href="/static/css/new.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/nav.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+
+{% block javascript %}
+<script src="https://kit.fontawesome.com/a076d05399.js" type="text/javascript"></script>
+{% endblock %}
+
+{% block content %} 
+    <input type="checkbox" id="active">
+    <label for="active" class="menu-btn"><span></span></label>
+    <label for="active" class="close"></label>
+    <div class="wrapper">
+        <ul>
+            <li><a href="http://61.30.143.169:8000/">Home</a></li>
+            <li><a href="http://61.30.143.169:8000/all/">Student</a></li>
+            <li><a href="http://61.30.143.169:8000/new/">New</a></li>
+            <li><a href="http://61.30.143.169:8000/mail/">Mail</a></li>
+        </ul>
+    </div>
+    <!-- <div class="content">
+        <div class="title">Fullscreen Overlay Navigation Bar</div>
+        <p>(Hamburger Menu-2)</p>
+    </div> -->
+    <section>
+        <div class="container">
+            <form action="." method="POST" name="form2" autocomplete="off"> 
+                <h3>屍身</h3>
+                {% csrf_token %}
+                <div class="inputBox">
+                    <span>姓名:{{postform.cName}}</span>
+                    <span >學號:{{postform.cNumber}}</span>
+                    <span>郵件:{{postform.cMail}}</span>
+                    <span>時段:{{postform.ctime}}</span>
+                    <span>年級:{{postform.cGrade}}</span>
+                    <span>系所:{{postform.cMajor}}</span>
+                    <span>狀態:{{postform.cStatus}}</span>
+                </div>
+                <div class="sbumit_btn">
+                    <input type="submit" id="button" name="button" value="ADD"/>
+                </div>
+                <div style="color: red; text-align: center; margin: 10px;">
+                    <b >{{message}}</b>
+                </div>
+                
+            </form> 
+        </div>
+
+    </section>
+   
+
+{% endblock %}

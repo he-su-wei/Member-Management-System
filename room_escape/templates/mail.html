@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}<title>Send Email</title>{% endblock %}
+{% load static %}
+{% block css %}
+<link href="/static/css/mail.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/nav.css" rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block javascript %}
+
+{% endblock %}
+
+{% block content %} 
+    <input type="checkbox" id="active">
+    <label for="active" class="menu-btn"><span></span></label>
+    <label for="active" class="close"></label>
+    <div class="wrapper">
+        <ul>
+            <li><a href="http://61.30.143.169:8000/">Home</a></li>
+            <li><a href="http://61.30.143.169:8000/all/">Student</a></li>
+            <li><a href="http://61.30.143.169:8000/new/">New</a></li>
+            <li><a href="http://61.30.143.169:8000/mail/">Mail</a></li>
+        </ul>
+    </div>
+    <div class='div-size'>
+        <div class="horizontal-vertical-center">
+            <form action="." name="send" method="POST">
+                {% csrf_token %}
+                <input type="image" name="email" src="../static/images/gmail-logo.svg" width="400vw" style="box-shadow: 25px 25px 75px rgba(87, 43, 43, 0.25), 
+                10px 10px 70px rgba(46, 27, 27, 0.25),
+                inset 5px 5px 10px rgba(165, 32, 32, 0.25),
+                inset 5px 5px 10px rgba(255, 255, 255, 0.2),
+                inset -5px -5px 15px rgba(0, 0, 0, 75);border-radius: 30px;height: 300px;">
+                <!-- <p style="color: aliceblue;">已上鎖</p> -->
+            </form>
+        </div>
+        <div class="horizontal-vertical-center" style="width: 35vw; ">
+            <h3 style="color: antiquewhite; margin-bottom: 10px;">總人數 : {{total}}</h3>
+            <h3 style="color: antiquewhite;">{{endSend}}</h3>
+        </div>
+    <div>
+
+
+{% endblock %}

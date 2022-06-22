@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% block title %}<title>查詢學生資訊</title>{% endblock %}
+{% load static %}
+{% block css %}
+<link href="/static/css/index.css" rel="stylesheet" type="text/css" />
+<link href="/static/css/nav.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet" type="text/css">
+<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet" type="text/css">
+{% endblock %}
+{% block javascript %}
+<script src="https://kit.fontawesome.com/a076d05399.js" type="text/javascript"></script>
+{% endblock %}
+{% block content %} 
+    <input type="checkbox" id="active">
+    <label for="active" class="menu-btn"><span></span></label>
+    <label for="active" class="close"></label>
+    <div class="wrapper">
+        <ul>
+            <li><a href="http://61.30.143.169:8000/">Home</a></li>
+            <li><a href="http://61.30.143.169:8000/all/">Student</a></li>
+            <li><a href="http://61.30.143.169:8000/new/">New</a></li>
+            <li><a href="http://61.30.143.169:8000/mail/">Mail</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="title">Fullscreen Overlay Navigation Bar</div>
+        <p>(Hamburger Menu-2)</p>
+    </div>
+
+    <section>
+        <div class="box">
+            <div class="form">
+                <h2>Search</h2>
+                <form action="." method="POST" name="search" autocomplete="off">
+                    {% csrf_token %}
+                    <div class="inputBx">
+                        <input type="text" id="cNumber" name="cNumber" placeholder="學號"  maxlength="9"/>
+                        <img src="{% static 'images/user.png' %}" alt="user image">
+                    </div>
+                    <div class="inputBx">
+                        <input type="submit" id="button" name="button" value="送出"/>
+                    </div>
+                </form>.
+        
+                {% if buff.cStatus == None %}
+                <h3 style="color: red;">{{message}}</h3>
+                {% else %}
+                <div class="info">
+                    <h4>學號: {{ buff.cNumber }}</h4>
+                    <h4>姓名: {{ buff.cName }}</h4>
+                    <h4>系所: {{ buff.cMajor }}</h4>
+                    <h4>年級: {{ buff.cGrade }}</h4>
+                    <h4>{{ buff.ctime }}</h4>
+                    <h4>狀態: 
+                        {% if buff.cStatus == "尚未進場" %}
+                        {{ buff.cStatus }}
+                            <form action="." method="POST" name="inRoom">
+                                {% csrf_token %}
+                                <input type="text" id="status" name="status" value='{{ buff.cNumber }}' style="display: none;"/>
+                                <input  style="margin-top: 8px; background: rgba(236, 236, 236, 0.65); 
+                                width: 50%; margin-left: 35px; box-shadow: 5px 7px 10px gray;border: none; border-radius: 5px;" 
+                                type="submit" id="button" name="status_btn" value="進場"/>
+                            </form>
+                        {% elif buff.cStatus == "已進場" %}
+                        <b style="color: red;">{{ buff.cStatus }}</b>
+                            <form action="." method="POST" name="inRoom">
+                                {% csrf_token %}
+                                <input type="text" id="status" name="status" value='{{ buff.cNumber }}' style="display: none;"/>
+                                
+                                
+                                <input style="margin-top: 8px; background: rgba(236, 236, 236, 0.65); 
+                                width: 50%; margin-left: 35px; box-shadow: 5px 7px 10px gray;border: none; border-radius: 5px;" 
+                                type="submit" id="button" name="status_btn" value="離場"/>
+                            </form>
+                        {% else %}
+                            <b style="color: red;">{{ buff.cStatus }}</b>
+                        {% endif %}
+                    </h4>
+
+                </div>
+                
+                {% endif %}
+                
+            </div>
+        </div>
+
+    </section>
+    
+    
+{% endblock %}
